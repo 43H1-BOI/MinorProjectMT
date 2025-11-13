@@ -4,31 +4,34 @@ const DataPreview = ({ data }) => {
   if (!data) return null;
 
   return (
-    <div className="w-full bg-white rounded-lg shadow-md p-6">
-      <h2 className="text-2xl font-bold mb-4 text-gray-800">Data Overview</h2>
+    <div className="card p-6">
+      <h3 className="text-lg font-semibold text-gray-900 mb-6">Data Overview</h3>
       
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-        <div className="bg-blue-50 p-4 rounded-lg">
-          <p className="text-sm text-gray-600">Total Rows</p>
-          <p className="text-3xl font-bold text-blue-600">{data.rows}</p>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+        <div className="bg-gradient-to-br from-blue-50 to-blue-100 p-5 rounded-xl border border-blue-200">
+          <p className="text-xs font-medium text-blue-600 uppercase tracking-wide mb-2">Total Rows</p>
+          <p className="text-3xl font-bold text-gray-900">{data.rows}</p>
         </div>
-        <div className="bg-green-50 p-4 rounded-lg">
-          <p className="text-sm text-gray-600">Total Columns</p>
-          <p className="text-3xl font-bold text-green-600">{data.columns}</p>
+        <div className="bg-gradient-to-br from-green-50 to-green-100 p-5 rounded-xl border border-green-200">
+          <p className="text-xs font-medium text-green-600 uppercase tracking-wide mb-2">Columns</p>
+          <p className="text-3xl font-bold text-gray-900">{data.columns}</p>
         </div>
-        <div className="bg-purple-50 p-4 rounded-lg">
-          <p className="text-sm text-gray-600">Status</p>
-          <p className="text-xl font-bold text-purple-600">Ready</p>
+        <div className="bg-gradient-to-br from-purple-50 to-purple-100 p-5 rounded-xl border border-purple-200">
+          <p className="text-xs font-medium text-purple-600 uppercase tracking-wide mb-2">Status</p>
+          <div className="flex items-center space-x-2">
+            <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+            <p className="text-xl font-semibold text-gray-900">Ready</p>
+          </div>
         </div>
       </div>
 
-      <div className="mb-4">
-        <h3 className="text-lg font-semibold mb-2 text-gray-700">Columns</h3>
+      <div className="mb-6">
+        <h4 className="text-sm font-medium text-gray-700 mb-3">Dataset Columns</h4>
         <div className="flex flex-wrap gap-2">
           {data.column_names.map((col, idx) => (
             <span
               key={idx}
-              className="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm font-medium"
+              className="inline-flex items-center px-3 py-1.5 bg-gray-100 text-gray-700 rounded-lg text-sm font-medium border border-gray-200"
             >
               {col}
             </span>
@@ -37,28 +40,28 @@ const DataPreview = ({ data }) => {
       </div>
 
       <div>
-        <h3 className="text-lg font-semibold mb-3 text-gray-700">Data Preview</h3>
-        <div className="overflow-x-auto">
-          <table className="min-w-full border-collapse border border-gray-300">
-            <thead>
-              <tr className="bg-gray-100">
+        <h4 className="text-sm font-medium text-gray-700 mb-3">Sample Data</h4>
+        <div className="overflow-x-auto rounded-lg border border-gray-200">
+          <table className="min-w-full divide-y divide-gray-200">
+            <thead className="bg-gray-50">
+              <tr>
                 {data.column_names.map((col, idx) => (
                   <th
                     key={idx}
-                    className="border border-gray-300 px-4 py-2 text-left text-sm font-semibold text-gray-700"
+                    className="px-4 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider"
                   >
                     {col}
                   </th>
                 ))}
               </tr>
             </thead>
-            <tbody>
+            <tbody className="bg-white divide-y divide-gray-200">
               {data.preview.map((row, idx) => (
-                <tr key={idx} className="hover:bg-gray-50">
+                <tr key={idx} className="hover:bg-gray-50 transition-colors">
                   {data.column_names.map((col, colIdx) => (
                     <td
                       key={colIdx}
-                      className="border border-gray-300 px-4 py-2 text-sm text-gray-600"
+                      className="px-4 py-3 text-sm text-gray-700"
                     >
                       {row[col] !== null && row[col] !== undefined ? row[col] : 'N/A'}
                     </td>
