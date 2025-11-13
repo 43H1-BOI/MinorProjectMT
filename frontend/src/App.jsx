@@ -18,7 +18,7 @@ function App() {
     setActiveTab('visualize');
   };
 
-  const handleTrainSuccess = (result) => {
+  const handleTrainSuccess = () => {
     setModelTrained(true);
     setActiveTab('predict');
   };
