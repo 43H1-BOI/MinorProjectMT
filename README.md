@@ -66,9 +66,150 @@ A full-stack web application for predicting employee salaries using machine lear
 - **Docker Compose**: Multi-container orchestration
 - **Nginx**: Frontend web server
 
+## Installation Guide
+
+### Prerequisites by Operating System
+
+<details>
+<summary><b>🪟 Windows 10/11</b></summary>
+
+#### Required Software
+
+1. **Python 3.11 or higher**
+   - Download from [python.org](https://www.python.org/downloads/)
+   - During installation, check "Add Python to PATH"
+   - Verify: `python --version` in Command Prompt
+
+2. **Node.js 18+ and npm**
+   - Download from [nodejs.org](https://nodejs.org/)
+   - Verify: `node --version` and `npm --version`
+
+3. **Git**
+   - Download from [git-scm.com](https://git-scm.com/download/win)
+   - Verify: `git --version`
+
+4. **Docker Desktop (Optional, for Docker setup)**
+   - Download from [docker.com](https://www.docker.com/products/docker-desktop)
+   - Enable WSL 2 backend during installation
+   - Verify: `docker --version` and `docker-compose --version`
+
+#### Windows-Specific Notes
+- Use **Command Prompt** or **PowerShell** (Run as Administrator if needed)
+- For virtual environment activation: `venv\Scripts\activate`
+- If you get "execution policy" errors in PowerShell, run: `Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser`
+
+</details>
+
+<details>
+<summary><b>🐧 Linux (Ubuntu/Debian/Fedora)</b></summary>
+
+#### Required Software
+
+1. **Python 3.11 or higher**
+   ```bash
+   # Ubuntu/Debian
+   sudo apt update
+   sudo apt install python3.11 python3.11-venv python3-pip
+   
+   # Fedora
+   sudo dnf install python3.11 python3-pip
+   ```
+   Verify: `python3 --version`
+
+2. **Node.js 18+ and npm**
+   ```bash
+   # Ubuntu/Debian - Using NodeSource
+   curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
+   sudo apt install -y nodejs
+   
+   # Fedora
+   sudo dnf install nodejs npm
+   ```
+   Verify: `node --version` and `npm --version`
+
+3. **Git**
+   ```bash
+   # Ubuntu/Debian
+   sudo apt install git
+   
+   # Fedora
+   sudo dnf install git
+   ```
+   Verify: `git --version`
+
+4. **Docker and Docker Compose (Optional)**
+   ```bash
+   # Ubuntu/Debian
+   sudo apt install docker.io docker-compose
+   sudo systemctl start docker
+   sudo systemctl enable docker
+   sudo usermod -aG docker $USER  # Add user to docker group
+   
+   # Fedora
+   sudo dnf install docker docker-compose
+   sudo systemctl start docker
+   sudo systemctl enable docker
+   sudo usermod -aG docker $USER
+   ```
+   **Note**: Log out and back in for group changes to take effect
+   Verify: `docker --version` and `docker-compose --version`
+
+#### Linux-Specific Notes
+- Use `python3` instead of `python` command
+- Use `pip3` instead of `pip` command
+- For virtual environment activation: `source venv/bin/activate`
+- May need `sudo` for system-wide package installations
+
+</details>
+
+<details>
+<summary><b>🍎 macOS</b></summary>
+
+#### Required Software
+
+1. **Homebrew (Package Manager)**
+   ```bash
+   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+   ```
+
+2. **Python 3.11 or higher**
+   ```bash
+   brew install python@3.11
+   ```
+   Verify: `python3 --version`
+
+3. **Node.js 18+ and npm**
+   ```bash
+   brew install node@18
+   ```
+   Verify: `node --version` and `npm --version`
+
+4. **Git**
+   ```bash
+   brew install git
+   ```
+   Verify: `git --version`
+
+5. **Docker Desktop (Optional)**
+   - Download from [docker.com](https://www.docker.com/products/docker-desktop)
+   - Or install via Homebrew: `brew install --cask docker`
+   - Verify: `docker --version` and `docker-compose --version`
+
+#### macOS-Specific Notes
+- Use `python3` command (not `python`)
+- Use `pip3` command (not `pip`)
+- For virtual environment activation: `source venv/bin/activate`
+- Xcode Command Line Tools may be required: `xcode-select --install`
+
+</details>
+
+---
+
 ## Quick Start
 
-### Using Docker (Recommended)
+### Option 1: Using Docker (Recommended - All Platforms)
+
+Docker provides the easiest setup experience across all platforms.
 
 1. **Clone the repository**
    ```bash
@@ -86,9 +227,48 @@ A full-stack web application for predicting employee salaries using machine lear
    - Backend API: http://localhost:8000
    - API Docs: http://localhost:8000/docs
 
-### Manual Setup
+4. **Stop the application**
+   ```bash
+   docker-compose down
+   ```
+
+### Option 2: Manual Setup (Development)
 
 #### Backend Setup
+
+<details>
+<summary><b>Windows Setup</b></summary>
+
+1. **Navigate to backend directory**
+   ```cmd
+   cd backend
+   ```
+
+2. **Create virtual environment**
+   ```cmd
+   python -m venv venv
+   ```
+
+3. **Activate virtual environment**
+   ```cmd
+   venv\Scripts\activate
+   ```
+
+4. **Install dependencies**
+   ```cmd
+   pip install -r requirements.txt
+   ```
+
+5. **Run the backend**
+   ```cmd
+   uvicorn main:app --reload
+   ```
+   Backend will run on http://localhost:8000
+
+</details>
+
+<details>
+<summary><b>Linux/macOS Setup</b></summary>
 
 1. **Navigate to backend directory**
    ```bash
@@ -97,22 +277,30 @@ A full-stack web application for predicting employee salaries using machine lear
 
 2. **Create virtual environment**
    ```bash
-   python -m venv venv
-   source venv/bin/activate  # On Windows: venv\Scripts\activate
+   python3 -m venv venv
    ```
 
-3. **Install dependencies**
+3. **Activate virtual environment**
    ```bash
-   pip install -r requirements.txt
+   source venv/bin/activate
    ```
 
-4. **Run the backend**
+4. **Install dependencies**
+   ```bash
+   pip3 install -r requirements.txt
+   ```
+
+5. **Run the backend**
    ```bash
    uvicorn main:app --reload
    ```
    Backend will run on http://localhost:8000
 
+</details>
+
 #### Frontend Setup
+
+**All Platforms (Windows/Linux/macOS)**
 
 1. **Navigate to frontend directory**
    ```bash
@@ -304,15 +492,177 @@ To test the application:
 
 ## Troubleshooting
 
-### Backend Issues
-- **Port 8000 already in use**: Change PORT in .env or stop other services
-- **Module not found**: Ensure all dependencies are installed with `pip install -r requirements.txt`
-- **CORS errors**: Check ALLOWED_ORIGINS in .env
+### Common Issues by Platform
 
-### Frontend Issues
-- **API connection failed**: Verify backend is running and VITE_API_URL is correct
-- **Build errors**: Delete node_modules and run `npm install` again
+<details>
+<summary><b>🪟 Windows Issues</b></summary>
+
+#### Backend Issues
+- **"python is not recognized"**: Ensure Python is added to PATH during installation, or reinstall Python with "Add to PATH" checked
+- **Virtual environment activation fails in PowerShell**: Run `Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser`
+- **Port 8000 already in use**: 
+  ```cmd
+  netstat -ano | findstr :8000
+  taskkill /PID <PID> /F
+  ```
+- **Module not found**: Ensure virtual environment is activated and run `pip install -r requirements.txt`
+- **pip install fails**: Try upgrading pip: `python -m pip install --upgrade pip`
+
+#### Frontend Issues
+- **"npm is not recognized"**: Restart Command Prompt after Node.js installation
+- **EACCES or permission errors**: Run Command Prompt as Administrator
 - **Port 5173 in use**: Vite will automatically use next available port
+
+#### Docker Issues
+- **Docker Desktop not starting**: Enable WSL 2 in Windows Features, restart computer
+- **"docker-compose command not found"**: Use `docker compose` (space, not hyphen) in newer Docker versions
+- **Container fails to start**: Check Docker Desktop is running, restart Docker service
+
+</details>
+
+<details>
+<summary><b>🐧 Linux Issues</b></summary>
+
+#### Backend Issues
+- **"python3: command not found"**: Install Python: `sudo apt install python3.11 python3-pip`
+- **pip install fails with permission error**: Don't use sudo with pip, use virtual environment
+- **Port 8000 already in use**:
+  ```bash
+  sudo lsof -i :8000
+  kill -9 <PID>
+  ```
+- **Module not found**: Ensure virtual environment is activated: `source venv/bin/activate`
+- **"ensurepip is not available"**: Install venv: `sudo apt install python3.11-venv`
+
+#### Frontend Issues
+- **npm permission errors**: Fix npm permissions:
+  ```bash
+  mkdir ~/.npm-global
+  npm config set prefix '~/.npm-global'
+  echo 'export PATH=~/.npm-global/bin:$PATH' >> ~/.bashrc
+  source ~/.bashrc
+  ```
+- **"node: command not found"**: Install Node.js from NodeSource or use nvm
+
+#### Docker Issues
+- **Permission denied**: Add user to docker group:
+  ```bash
+  sudo usermod -aG docker $USER
+  newgrp docker
+  ```
+- **Docker daemon not running**: Start docker: `sudo systemctl start docker`
+- **Container fails to build**: Check disk space: `df -h`
+
+</details>
+
+<details>
+<summary><b>🍎 macOS Issues</b></summary>
+
+#### Backend Issues
+- **"python3: command not found"**: Install Python via Homebrew: `brew install python@3.11`
+- **SSL certificate errors**: Install certificates:
+  ```bash
+  /Applications/Python\ 3.11/Install\ Certificates.command
+  ```
+- **Port 8000 already in use**:
+  ```bash
+  lsof -i :8000
+  kill -9 <PID>
+  ```
+- **xcrun: error**: Install Xcode Command Line Tools: `xcode-select --install`
+
+#### Frontend Issues
+- **npm install fails**: Clear cache: `npm cache clean --force` and try again
+- **M1/M2 Mac compatibility issues**: Ensure you're using ARM64-compatible Node.js version
+
+#### Docker Issues
+- **Docker Desktop won't start**: Check System Preferences > Security & Privacy for blocked items
+- **Performance issues**: Allocate more resources in Docker Desktop preferences (CPU/Memory)
+- **"Cannot connect to Docker daemon"**: Ensure Docker Desktop is running
+
+</details>
+
+### General Issues (All Platforms)
+
+#### Backend Issues
+- **CORS errors**: Check ALLOWED_ORIGINS in backend/.env matches your frontend URL
+- **File upload fails**: Ensure CSV has 'Experience' and 'Salary' columns, file size under 10MB
+- **Model training fails**: Check data quality, ensure sufficient data rows (minimum 10)
+
+#### Frontend Issues
+- **API connection failed**: 
+  - Verify backend is running on http://localhost:8000
+  - Check VITE_API_URL in frontend/.env
+  - Check browser console for detailed errors
+- **Build errors**: Delete node_modules folder and package-lock.json, then run `npm install`
+- **Blank page after build**: Check browser console, ensure API URL is correct
+
+#### Docker Issues
+- **Containers fail to communicate**: Restart docker-compose: `docker-compose down && docker-compose up -d`
+- **Out of disk space**: Clean Docker: `docker system prune -a --volumes`
+- **Changes not reflected**: Rebuild containers: `docker-compose up -d --build`
+
+## Quick Command Reference
+
+### Docker Commands
+```bash
+# Start application
+docker-compose up -d
+
+# Stop application
+docker-compose down
+
+# View logs
+docker-compose logs -f
+
+# Rebuild containers
+docker-compose up -d --build
+
+# Clean up
+docker system prune -a
+```
+
+### Backend Commands (in backend directory)
+
+#### Windows
+```cmd
+# Setup
+python -m venv venv
+venv\Scripts\activate
+pip install -r requirements.txt
+
+# Run
+uvicorn main:app --reload
+```
+
+#### Linux/macOS
+```bash
+# Setup
+python3 -m venv venv
+source venv/bin/activate
+pip3 install -r requirements.txt
+
+# Run
+uvicorn main:app --reload
+```
+
+### Frontend Commands (in frontend directory)
+```bash
+# Setup
+npm install
+
+# Development
+npm run dev
+
+# Production build
+npm run build
+
+# Preview production build
+npm run preview
+
+# Lint
+npm run lint
+```
 
 ## License
 
