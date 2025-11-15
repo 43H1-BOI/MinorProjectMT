@@ -1,0 +1,4 @@
+# Test dependencies for API testing scripts
+# Install with: pip install -r test-requirements.txt
+
+requests>=2.31.0
