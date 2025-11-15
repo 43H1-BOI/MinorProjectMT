@@ -2,6 +2,8 @@
 
 A full-stack web application for predicting employee salaries using machine learning. Built with FastAPI backend and React frontend.
 
+> 🪟 **Windows Users:** See [WINDOWS_SETUP.md](WINDOWS_SETUP.md) for detailed Windows-specific setup instructions and troubleshooting.
+
 ## Features
 
 ### Data Management
@@ -482,7 +484,40 @@ npm run build
 
 ## Testing
 
-To test the application:
+### Automated API Testing
+
+The project includes cross-platform test scripts to validate all API endpoints:
+
+#### Using Python Script (Recommended - All Platforms)
+```bash
+# Install test dependencies (only needed once)
+pip install -r test-requirements.txt
+
+# Run tests (make sure backend is running first)
+python test_api.py
+```
+
+#### Platform-Specific Scripts
+
+**Windows (Command Prompt):**
+```cmd
+test_api.bat
+```
+
+**Windows (PowerShell):**
+```powershell
+.\test_api.ps1
+```
+
+**Linux/macOS (Bash):**
+```bash
+chmod +x test_api.sh
+./test_api.sh
+```
+
+### Manual Testing
+
+To manually test the application:
 
 1. Upload the sample CSV file (`backend/sample_data.csv`)
 2. Train a model using XGBoost
